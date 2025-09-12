@@ -1,0 +1,26 @@
+Package: CAdeathserver
+Type: Package
+Title: Code for Analyzing CA Death Data on the PEARL Server
+Version: 0.1.0
+Authors@R: 
+    person("Luke", "Slipski", , "lslipski602@gmail.com", role = c("aut", "cre"))
+Maintainer: The package maintainer <yourself@somewhere.net>
+Description: Contains code for analyzing CA death data on the PEARL server.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr,
+    httr,
+    jsonlite,
+    magrittr,
+    purrr,
+    readr,
+    stringr,
+    tidyr
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
