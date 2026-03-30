@@ -126,7 +126,7 @@ recode_education_farmworkers <- function(df) {
         education.degree.nchs == 2 ~ "2. 9th through 12th grade; no diploma",
         education.degree.nchs == 3 ~ "3. High School Graduate or GED Completed",
         education.degree.nchs %in% 4:8 ~ "4. More than High School or GED",
-        education.degree.nchs == 9 ~ "5. Unknown",
+        education.degree.nchs == 9 | is.na(education.degree.nchs) ~ "5. Unknown",
         TRUE ~ "You missed a code if this label exists"
       )
     ) 
