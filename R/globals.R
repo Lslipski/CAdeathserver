@@ -20,4 +20,6 @@ utils::globalVariables(c(# var names used in utils.R functions
                                 "death",
                                 "covid_death",
                                 "month",
-                                "age_int"))
+                                "age_int",
+                                "id.x",
+                                "id.y"))

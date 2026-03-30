@@ -55,7 +55,10 @@ join_industry_occupation <- function(df) {
   df_matched <- df %>%
     dplyr::left_join(df_ind_occ,
               by = c("industry" = "mortality_industry",
-                     "occupation" = "mortality_occupation"))
+                     "occupation" = "mortality_occupation")) %>% 
+    # cleaning up because industry_occupation and mortality data both have an id column
+    dplyr::rename(id = id.x) %>% 
+    dplyr::select(-id.y)
 
   return(df_matched)
 
