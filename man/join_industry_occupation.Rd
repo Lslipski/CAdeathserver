@@ -9,6 +9,7 @@ join_industry_occupation(df)
 \arguments{
 \item{df}{to match industry/occupation data to. Must contain variables `industry` and `occupation`.
 See NIOCCS documentation for variable descriptions https://csams.cdc.gov/nioccs/HelpOutput.aspx
+
  - census_ind_code
  - census_ind_title
  - census_occ_code

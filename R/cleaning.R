@@ -27,12 +27,45 @@ recode_race <- function(df) {
         race.1.code.final == 20 ~ "Black",
         race.1.code.final %in% c(30, 57, 58) ~ "American Indian / Native American",
         race.1.code.final %in% c(41:49, 52:56, 59) ~ "Asian / Pacific Islander",
-        race.1.code.final %in% c(99, 51) ~ "Other",
+        race.1.code.final %in% c(99, 51, 98) ~ "Other",
         ## Some rows missing everything
         is.na(race.1.code.final) &
           is.na(race.2.code.final) &
           is.na(race.3.code.final) ~ "Other",
         ## Search on this to make sure it's correct
+        TRUE ~ "You missed a code if this label exists"
+      )
+    )
+}
+
+
+#' recode_marital_status
+#'
+#' @param df a tibble containing raw mortality data with variable `marital.status`
+#'
+#' @returns identical tibble with new variable `recode_marital_status`
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' df_with_clean_marital_status <- df_raw %>%
+#'                                       recode_marital_status()}
+recode_marital_status <- function(df) {
+  df %>% 
+    dplyr::mutate(
+      recode_marital_status = dplyr::case_when(
+        # Married
+        marital.status == "M" ~ "Married",
+        # Widowed 
+        marital.status == "W" ~ "Widowed",
+        # Divorced 
+        marital.status == "D" ~ "Divorced",
+        # Never Married
+        marital.status == "S" ~ "Never Married",
+        # Unknown
+        marital.status == "U" ~ "Unknown",
+        marital.status %in% c("P", "V", "X", "Y") ~ "Other",
+        # All other
         TRUE ~ "You missed a code if this label exists"
       )
     )
