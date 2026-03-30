@@ -85,19 +85,19 @@ recode_age <- function(df) {
     dplyr::mutate(recode_age_int = as.integer(age.in.years))
 }
 
-#' recode_education
+#' recode_education_standard
 #' @param df a tibble containing raw mortality data
-#' @returns tibble same as input with new recoded education variable
+#' @returns tibble same as input with new recoded education variable `recode_educ_standard`
 #' @export
 #' @examples
 #' \dontrun{
 #' df_raw_with_clean_educ <- df_raw %>%
 #'                             recode_education()}
-recode_education <- function(df) {
+recode_education_standard <- function(df) {
   df %>%
     dplyr::mutate(age_int = as.integer(age.in.years)) %>%
     dplyr::mutate(
-      recode_educ = dplyr::case_when(
+      recode_educ_standard = dplyr::case_when(
         age_int < 25 ~ "under25",
         education.degree.nchs %in% 1:2 ~ "< hs",
         education.degree.nchs == 3 ~ "hs",
@@ -108,6 +108,28 @@ recode_education <- function(df) {
       )
     ) %>%
     dplyr::select(-age_int)
+}
+
+#' recode_education_farmworkers
+#' @param df a tibble containing raw mortality data
+#' @returns tibble same as input with new recoded education variable `recode_educ_farmwork`
+#' @export
+#' @examples
+#' \dontrun{
+#' df_raw_with_clean_educ <- df_raw %>%
+#'                             recode_education_farmworkers()}
+recode_education_farmworkers <- function(df) {
+  df %>%
+    dplyr::mutate(
+      recode_educ_farmwork = dplyr::case_when(
+        education.degree.nchs == 1 ~ "1. 8th grade or less",
+        education.degree.nchs == 2 ~ "2. 9th through 12th grade; no diploma",
+        education.degree.nchs == 3 ~ "3. High School Graduate or GED Completed",
+        education.degree.nchs %in% 4:8 ~ "4. More than High School or GED",
+        education.degree.nchs == 9 ~ "5. Unknown",
+        TRUE ~ "You missed a code if this label exists"
+      )
+    ) 
 }
 
 #' recode_sex
