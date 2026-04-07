@@ -55,16 +55,15 @@ recode_marital_status <- function(df) {
     dplyr::mutate(
       recode_marital_status = dplyr::case_when(
         # Married
-        marital.status == "M" ~ "Married",
+        marital.status %in% c("M", "P", "X", "Y") ~ "Married/Partnered",
         # Widowed 
-        marital.status == "W" ~ "Widowed",
+        marital.status %in% c("W", "V") ~ "Widowed",
         # Divorced 
         marital.status == "D" ~ "Divorced",
         # Never Married
         marital.status == "S" ~ "Never Married",
         # Unknown
         marital.status == "U" ~ "Unknown",
-        marital.status %in% c("P", "V", "X", "Y") ~ "Other",
         # All other
         TRUE ~ "You missed a code if this label exists"
       )
