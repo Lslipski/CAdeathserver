@@ -39,6 +39,33 @@ recode_race <- function(df) {
 }
 
 
+#' recode_facility_of_death
+#'
+#' @param df a tibble containing raw mortality data
+#'
+#' @returns tibble same as input with new recode_facility_of_death variable
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' df_with_clean_race <- df_raw %>%
+#'                           recode_facility_of_death()}
+recode_facility_of_death <- function(df) {
+  df %>% 
+    dplyr::mutate(
+      recode_facility_of_death = dplyr::case_when(place.of.death.facility == 1 ~ "Inpatient",
+                                                  place.of.death.facility == 2 ~ "Emergency Room/Outpatient",
+                                                  place.of.death.facility == 3 ~ "Dead on Arrival",
+                                                  place.of.death.facility == 4 ~ "Decedent's Home",
+                                                  place.of.death.facility == 5 ~ "Hospice Facility",
+                                                  place.of.death.facility == 6 ~ "Nursing Home/Long Term Care Facility",
+                                                  place.of.death.facility == 7 ~ "Other",
+                                                  place.of.death.facility == 9 ~ "Unknown",
+                                                  TRUE ~ "You missed a code if this label exists")
+    )
+}
+
+
 #' recode_marital_status
 #'
 #' @param df a tibble containing raw mortality data with variable `marital.status`
