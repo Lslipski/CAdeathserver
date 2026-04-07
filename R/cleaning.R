@@ -26,7 +26,7 @@ recode_race <- function(df) {
         race.1.code.final == 10 ~ "White",
         race.1.code.final == 20 ~ "Black",
         race.1.code.final %in% c(30, 57, 58) ~ "American Indian / Native American",
-        race.1.code.final %in% c(41:49, 52:56, 59) ~ "Asian / Pacific Islander",
+        race.1.code.final %in% c(41:49, 52:56, 59, 60:67) ~ "Asian / Pacific Islander",
         race.1.code.final %in% c(99, 51, 98) ~ "Other",
         ## Some rows missing everything
         is.na(race.1.code.final) &
